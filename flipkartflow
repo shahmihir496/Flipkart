@@ -1,0 +1,193 @@
+//Note : Please user your email/password for Login.I removed my details
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class gmail {
+	public WebDriver driver;
+
+	@BeforeTest
+
+	public void launchBrowser() throws InterruptedException {
+		System.setProperty("webdriver.gecko.driver", "D:\\eclipse\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+
+	}
+
+	@Test
+	public void flipcart() throws InterruptedException {
+		// Step 1. Open Google.com
+		driver.get("https://www.google.com");
+
+		// Step 2. Search For Flipkart
+		WebElement search = driver.findElement(By.xpath("//input[@class='gLFyf gsfi']"));
+		search.sendKeys("Flipkart");
+
+		// step 3 print all the search options displayed in console
+		List<WebElement> print = driver
+				.findElements(By.xpath("//ul[@role='listbox']//li/descendant::div[@class='sbl1']"));
+
+		System.out.println(print.size());
+		for (WebElement we : print) {
+			System.out.println(we.getText());
+		}
+
+		// Step 4 Press Enter
+
+		driver.findElement(By.xpath("//input[@title='Search']")).sendKeys(Keys.ENTER);
+		// Click on Flipkart
+		// driver.findElement(By.cssSelector("div[class='cfxYMc JfZTW c4Djg MUxGbd
+		// v0nnCb']")).click();
+		driver.findElement(By.xpath(
+				"//div[@class='TbwUpd NJjxre']//cite[@class='iUh30 Zu0yb tjvcx'][normalize-space()='www.flipkart.com']"))
+				.click();
+		// Now click on First Link
+
+		// Step 5 Close the login popup on the website
+		driver.findElement(By.xpath("//button//div//following-sibling::span[contains(text(),'Login')]")).isDisplayed();
+
+		driver.findElement(By.xpath("/html/body/div[2]/div/div/button")).click();
+
+		// Step 6 Click on TV & Appliances drop down button and Navigate to window ac
+		// page
+
+		Actions act = new Actions(driver);
+		WebElement mainmenu = driver.findElement(By.cssSelector(
+				"div:nth-child(1) div._331-kn div._3Il5oO.dwRsDN div._1kidPb > span._2I9KP_:nth-child(2)"));
+		act.moveToElement(mainmenu).build().perform();// taking mouse
+		WebElement windowac = driver.findElement(By.cssSelector("a[title='Window ACs']"));
+		windowac.click();// clicking on window ac
+
+		// Step 7 Click on Add to compare check box for 2nd,3rd and 6th
+		// Select 2nd Check box
+		WebElement option2 = driver.findElement(By.cssSelector(
+				"div.E2-pcE:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(1) > div:nth-child(1) > label:nth-child(1) > div:nth-child(2)"));
+		option2.click();
+
+		// scroll down
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,120)");
+
+		// Select 3rd Check box
+		WebElement option3 = driver.findElement(By.cssSelector(
+				"html.fonts-loaded body div#container div div._3LxdjL._3NzWOH div._3FqKqJ div.E2-pcE._3zjXRo div.E2-pcE._1q8tSL div._2pi5LC.col-12-12 div._13oc-S div div._2kHMtA a._1fQZEK div.MIXNux div._3wLduG div._3PzNI- span.f3A4_V div._2iDkf8 label div._24_Dny"));
+		option3.click();
+
+		// Select 6th Check box
+		WebElement option6 = driver.findElement(By.cssSelector(
+				"div._2pi5LC:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(1) > div:nth-child(1) > label:nth-child(1) > div:nth-child(2)"));
+		option6.click();
+
+		// Step 8 Click on Compare Button
+
+		WebElement compare = driver.findElement(By.xpath("//span[contains(text(),'COMPARE')]"));
+		compare.click();// clicking on compare
+
+		// Step 9 Print Name and Price
+		// Print first product name & Price
+		List<WebElement> elements = driver.findElements(By.cssSelector("div.col.col-3-12._1Z-FPJ:nth-child(2) > a"));
+		for (WebElement e : elements) {
+			System.out.println(e.getAttribute("innerText"));
+		}
+
+		// Step 10 Add all 3 products in the cart
+
+		// scroll down
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("window.scrollBy(0,100)");
+
+		// Click on First Buy Now
+		WebElement FirstButton = driver.findElement(By.cssSelector(
+				"._1DeyHe > div:nth-child(3) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > button:nth-child(1)"));
+		FirstButton.click();
+
+		// Back to one page
+		driver.navigate().back();
+
+		// Click on Second Buy Now
+		Thread.sleep(1000);
+		WebElement SecondButton = driver
+				.findElement(By.cssSelector("div:nth-child(4) div:nth-child(1) form:nth-child(1) button:nth-child(1)"));
+		SecondButton.click();
+
+		// Back to one page
+		driver.navigate().back();
+
+		// Click on Third Buy Now
+		Thread.sleep(1000);
+		WebElement ThirdButton = driver.findElement(By.cssSelector(
+				"div[class='row CQXY4c'] div:nth-child(3) div:nth-child(1) form:nth-child(1) button:nth-child(1)"));
+		ThirdButton.click();
+
+		// Step 11 Go to cart (need to Login) I user my email and password for login.Please user your Login details for go further
+
+		driver.findElement(By.cssSelector("._2IX_2-")).sendKeys("");
+		driver.findElement(By.cssSelector("._2KpZ6l")).click();
+		driver.findElement(By.cssSelector("input[type='password']")).sendKeys("");
+		driver.findElement(By.cssSelector("._2KpZ6l")).click();
+		Thread.sleep(3000);
+		driver.get("https://www.flipkart.com/account/login?ret=/viewcart");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//img[@class='xhPPpX']")).click();
+
+		WebElement element = driver.findElement(By.xpath("//input[@placeholder='Enter delivery pincode']"));
+		element.sendKeys("380013");
+
+		driver.findElement(By.cssSelector(".UgLoKg")).click();
+
+		// Step 12 print the message getting displayed for the avaibility
+		// Check text on page
+		Thread.sleep(3000);
+		WebElement textElement = driver.findElement(By.xpath("//div[@class='_2pqhhf']"));
+		String text = textElement.getText();
+		System.out.println("The first text for zipcode 380013 is: " + text);
+
+		WebElement textElement1 = driver
+				.findElement(By.xpath("//span[normalize-space()='10 Days Replacement Policy']"));
+		String text1 = textElement1.getText();
+		System.out.println("The Second text for zipcode 380013 is: " + text1);
+
+		// Step 13 Click the deliver to input box & check for another pin code
+
+		// now enter different zip code 380014
+
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//img[@class='xhPPpX']")).click();
+		WebElement element3 = driver.findElement(By.cssSelector(".cfnctZ"));
+		element3.sendKeys("380014");
+
+		driver.findElement(By.cssSelector(".UgLoKg")).click();
+
+		// Step 14 print the message getting displayed for the avaibility Check text on
+		// page for zip code 380014
+		Thread.sleep(3000);
+		WebElement textElement5 = driver.findElement(By.xpath("//div[@class='_2pqhhf']"));
+		String text5 = textElement5.getText();
+		System.out.println("The first text for zipcode 380014 is: " + text5);
+
+		WebElement textElement6 = driver
+				.findElement(By.xpath("//span[normalize-space()='10 Days Replacement Policy']"));
+		String text6 = textElement6.getText();
+		System.out.println("The first text for zipcode 380014 is: " + text6);
+	}
+
+	@AfterTest
+	public void terminateBrowser() {
+		 driver.close();
+
+	}
+
+}
