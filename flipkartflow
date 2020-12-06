@@ -1,4 +1,3 @@
-//Note : Please user your email/password for Login.I removed my details
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -133,9 +132,10 @@ public class gmail {
 		ThirdButton.click();
 
 		// Step 11 Go to cart (need to Login) I user my email and password for login.Please user your Login details for go further
-
+       // Please enter login email id
 		driver.findElement(By.cssSelector("._2IX_2-")).sendKeys("");
 		driver.findElement(By.cssSelector("._2KpZ6l")).click();
+		// Please enter password
 		driver.findElement(By.cssSelector("input[type='password']")).sendKeys("");
 		driver.findElement(By.cssSelector("._2KpZ6l")).click();
 		Thread.sleep(3000);
